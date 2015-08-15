@@ -26,6 +26,7 @@ class Recaptcha2
 
 
 
+
   validate:(response='',remoteip)->
     $=@
     return new Promise (resolve,reject)->

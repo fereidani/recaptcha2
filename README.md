@@ -24,7 +24,7 @@ recaptcha=new reCAPTCHA({
 ```
 **Config details :**
 
-Config of main class is an javascript object and attributes are :
+Config of main class is a javascript object and attributes are :
 
 ```
 siteKey : your Site Key from google
@@ -36,8 +36,8 @@ ssl : use https to access google api ( boolean - default : true )
 
 **How to verify captcha key :**
 
-reCAPTCHA2 use Promises to validate key you can easily use following methods to verify captchas :
-* please mention on catch response library return error codes from google which you can translate with translateErrors method
+reCAPTCHA2 use Promises to validate captch , you can easily use following methods to verify captchas :
+* please mention on catch , library passes error codes from google which you can translate with translateErrors method
 
 Simple:
 ```

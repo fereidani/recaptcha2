@@ -67,5 +67,6 @@ function submitForm(req,res){
 ```
 
 **Form Element:**
-recaptcha.formElement() returns google standard form element for recaptcha which you can include in your html
+
+recaptcha.formElement() returns standard form element for reCAPTCHA which you should include in end of your html form element
 

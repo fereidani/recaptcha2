@@ -1,7 +1,7 @@
 {
   "name": "recaptcha2",
-  "version": "1.0.6",
-  "description": "Easy verifier for google reCAPTCHA version 2",
+  "version": "1.0.7",
+  "description": "Easy api for google reCAPTCHA version 2 for node.js and express.js",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,7 +18,8 @@
     "recaptcha",
     "captcha",
     "security",
-    "csrf"
+    "csrf",
+    "express"
   ],
   "author": "Khashayar Fereidani",
   "license": "MIT",

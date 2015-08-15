@@ -1,6 +1,6 @@
 {
   "name": "recaptcha2",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Easy verifier for google reCAPTCHA version 2",
   "main": "index.js",
   "scripts": {

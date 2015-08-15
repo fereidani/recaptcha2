@@ -11,7 +11,7 @@
 
     errorList = {
       'request-error': 'Api request failed .',
-      'json-parse': 'Response JSON pars failed.',
+      'json-parse': 'Response JSON parse failed.',
       'missing-input-secret': 'The secret parameter is missing.',
       'invalid-input-secret': 'The secret parameter is invalid or malformed.',
       'missing-input-response': 'The response parameter is missing.',
@@ -31,26 +31,36 @@
     }
 
     Recaptcha2.prototype.validate = function(response, remoteip) {
+      var $;
       if (response == null) {
         response = '';
       }
+      $ = this;
       return new Promise(function(resolve, reject) {
+        var options;
         if (response === '') {
           return reject(['missing-input-response']);
         }
-        return request.post(this.api, {
-          secret: this.config.secretKey,
-          response: response,
-          remoteip: remoteip
-        }, function(error, response, body) {
+        options = {
+          url: $.api,
+          method: 'POST',
+          form: {
+            secret: $.config.secretKey,
+            response: response
+          }
+        };
+        if (remoteip !== void 0) {
+          options.form.remoteip = remoteip;
+        }
+        return request(options, function(error, response, body) {
           var result, tryErr;
           if (error) {
-            return reject(['request-error']);
+            return reject(['request-error', error.toString()]);
           } else {
             try {
               result = JSON.parse(body);
               if (result.success) {
-                return accept(true);
+                return resolve(true);
               } else {
                 return reject(result['error-codes']);
               }
@@ -73,11 +83,11 @@
         ret = [];
         for (i = 0, len = errorCodes.length; i < len; i++) {
           key = errorCodes[i];
-          ret.push(errorList[key] || '');
+          ret.push(errorList[key] || key);
         }
         return ret;
       } else {
-        return errorList[key] || '';
+        return errorList[key] || key;
       }
     };
 

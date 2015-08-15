@@ -18,7 +18,7 @@ after that add this code to your html :
 reCAPTCHA=require('recaptcha2')
 
 recaptcha=new reCAPTCHA({
-  siteKey:'your-site-key'
+  siteKey:'your-site-key',
   secretKey:'your-secret-key'
 })
 ```
@@ -50,6 +50,9 @@ recaptcha.validate(key)
   console.log(recaptcha.translateErrors(errorCodes));// translate error codes to human readable text
 });
 ```
+you can also pass remoteip to validate method after key , for more information please read reCAPTCHA manual about remoteip .
+
+
 
 For Express (you need body-parser) :
 ```

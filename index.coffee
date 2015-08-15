@@ -6,7 +6,8 @@ request=require('request')
 class Recaptcha2
 
   errorList={
-    'request-error':'request to api failed .'
+    'request-error':'Api request failed .'
+    'json-parse':'Response JSON pars failed.'
     'missing-input-secret':'The secret parameter is missing.'
     'invalid-input-secret':'The secret parameter is invalid or malformed.'
     'missing-input-response':'The response parameter is missing.'
@@ -53,6 +54,9 @@ class Recaptcha2
             return reject(['request-error','json-parse'])
       )
       # REQUEST_END
+
+  validateRequest:(req)->
+    return @validate(req.body['g-recaptcha-response'])
 
   translateErrors:(errorCodes)->
     if Array.isArray errorCodes

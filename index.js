@@ -12,7 +12,8 @@
     function Recaptcha2() {}
 
     errorList = {
-      'request-error': 'request to api failed .',
+      'request-error': 'Api request failed .',
+      'json-parse': 'Response JSON pars failed.',
       'missing-input-secret': 'The secret parameter is missing.',
       'invalid-input-secret': 'The secret parameter is invalid or malformed.',
       'missing-input-response': 'The response parameter is missing.',
@@ -62,6 +63,10 @@
           }
         });
       });
+    };
+
+    Recaptcha2.prototype.validateRequest = function(req) {
+      return this.validate(req.body['g-recaptcha-response']);
     };
 
     Recaptcha2.prototype.translateErrors = function(errorCodes) {

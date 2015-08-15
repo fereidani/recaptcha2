@@ -14,7 +14,7 @@ class Recaptcha2
     'invalid-input-response':'The response parameter is invalid or malformed.'
   }
 
-  construct:(@config)->
+  constructor:(@config)->
 
     if @config.ssl is undefined
       @config.ssl=true
@@ -70,17 +70,6 @@ class Recaptcha2
 
   formElement:(htmlClass)->
     return """<div class="#{htmlClass||'g-recaptcha'}" data-sitekey="#{@config.siteKey}"></div>"""
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -9,8 +9,6 @@
   Recaptcha2 = (function() {
     var errorList;
 
-    function Recaptcha2() {}
-
     errorList = {
       'request-error': 'Api request failed .',
       'json-parse': 'Response JSON pars failed.',
@@ -20,17 +18,17 @@
       'invalid-input-response': 'The response parameter is invalid or malformed.'
     };
 
-    Recaptcha2.prototype.construct = function(config) {
+    function Recaptcha2(config) {
       this.config = config;
       if (this.config.ssl === void 0) {
         this.config.ssl = true;
       }
       if (this.config.ssl) {
-        return this.api = "https://www.google.com/recaptcha/api/siteverify";
+        this.api = "https://www.google.com/recaptcha/api/siteverify";
       } else {
-        return this.api = "http://www.google.com/recaptcha/api/siteverify";
+        this.api = "http://www.google.com/recaptcha/api/siteverify";
       }
-    };
+    }
 
     Recaptcha2.prototype.validate = function(response, remoteip) {
       if (response == null) {

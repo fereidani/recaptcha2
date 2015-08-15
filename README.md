@@ -70,3 +70,5 @@ function submitForm(req,res){
 
 recaptcha.formElement() returns standard form element for reCAPTCHA which you should include in end of your html form element
 
+you can also set class name like recaptcha.formElement('custom-class-for-recaptcha')
+

@@ -1,7 +1,7 @@
 {
   "name": "recaptcha2",
   "version": "1.0.3",
-  "description": "Easy verifier for google recaptcha version 2",
+  "description": "Easy verifier for google reCAPTCHA version 2",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

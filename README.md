@@ -1,2 +1,4 @@
-# recaptcha2
-Easy verifier for google recaptcha version 2
+# reCAPTCHA2
+Easy verifier for google reCAPTCHA version 2
+
+

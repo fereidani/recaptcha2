@@ -7,7 +7,13 @@ Easy verifier for google reCAPTCHA version 2 for Node.js
 
 You need to receive Site Key and Secret Key for your domain from : https://www.google.com/recaptcha/intro/index.html
 
-**How to init :**
+after that add this code to your html :
+
+```
+<script src='https://www.google.com/recaptcha/api.js'></script>
+```
+
+**How to initialize :**
 ```
 reCAPTCHA=require('recaptcha2')
 
@@ -60,5 +66,6 @@ function submitForm(req,res){
 }
 ```
 
-
+**Form Element:**
+recaptcha.formElement() returns google standard form element for recaptcha which you can include in your html
 

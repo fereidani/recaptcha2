@@ -1,0 +1,29 @@
+{
+  "name": "recaptcha2",
+  "version": "1.0.3",
+  "description": "Easy verifier for google recaptcha version 2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/fereidani/recaptcha2.git"
+  },
+  "dependencies": {
+    "bluebird":"2.x",
+    "request":"2.x"
+  },
+  "keywords": [
+    "recaptcha",
+    "captcha",
+    "security",
+    "csrf"
+  ],
+  "author": "Khashayar Fereidani",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fereidani/recaptcha2/issues"
+  },
+  "homepage": "https://github.com/fereidani/recaptcha2#readme"
+}

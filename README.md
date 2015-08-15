@@ -5,7 +5,7 @@ Easy verifier for google reCAPTCHA version 2 for Node.js
 
 **First:**
 
-You need to recieve Site Key and Secret Key for your domain from : https://www.google.com/recaptcha/intro/index.html
+You need to receive Site Key and Secret Key for your domain from : https://www.google.com/recaptcha/intro/index.html
 
 **How to init :**
 ```

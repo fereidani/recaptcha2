@@ -1,5 +1,5 @@
 # reCAPTCHA2
-Easy verifier for google reCAPTCHA version 2
+Easy verifier for google reCAPTCHA version 2 for Node.js
 
 # Documents :
 

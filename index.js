@@ -74,11 +74,7 @@
     };
 
     Recaptcha2.prototype.validateRequest = function(req, ip) {
-      if (ip === true) {
-        return this.validate(req.body['g-recaptcha-response'], req.ip);
-      } else {
-        return this.validate(req.body['g-recaptcha-response']);
-      }
+      return this.validate(req.body['g-recaptcha-response'], ip);
     };
 
     Recaptcha2.prototype.translateErrors = function(errorCodes) {

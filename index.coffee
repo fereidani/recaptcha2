@@ -64,10 +64,7 @@ class Recaptcha2
 # REQUEST_END
 
   validateRequest:(req, ip)->
-    if ip is true
-      return @validate(req.body['g-recaptcha-response'],req.ip)
-    else
-      return @validate(req.body['g-recaptcha-response'])
+    return @validate(req.body['g-recaptcha-response'],ip)
 
   translateErrors:(errorCodes)->
     if Array.isArray errorCodes

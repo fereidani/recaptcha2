@@ -63,8 +63,8 @@ class Recaptcha2
       )
 # REQUEST_END
 
-  validateRequest:(req)->
-    return @validate(req.body['g-recaptcha-response'])
+  validateRequest:(req, ip)->
+    return @validate(req.body['g-recaptcha-response'],ip)
 
   translateErrors:(errorCodes)->
     if Array.isArray errorCodes

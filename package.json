@@ -4,15 +4,22 @@
   "description": "Easy api for google reCAPTCHA version 2 for node.js and express.js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha --compilers coffee:coffee-script/register --recursive tests",
+    "compile": "./node_modules/.bin/coffee -c index.coffee"
   },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/fereidani/recaptcha2.git"
   },
   "dependencies": {
-    "bluebird":"2.x",
-    "request":"2.x"
+    "bluebird": "2.x",
+    "request": "2.x"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.11.1",
+    "mocha": "^2.5.3",
+    "nock": "^8.0.0",
+    "should": "^11.1.0"
   },
   "keywords": [
     "recaptcha",

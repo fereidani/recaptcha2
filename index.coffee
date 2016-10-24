@@ -1,9 +1,9 @@
 
 request = require 'request'
+Promise = require 'bluebird'  if not Promise
 
 ERRORS =
-  'request-error': 'Api request failed .'
-  'json-parse': 'Response JSON parse failed.'
+  'request-error': 'Api request failed.'
   'missing-input-secret': 'The secret parameter is missing.'
   'invalid-input-secret': 'The secret parameter is invalid or malformed.'
   'missing-input-response': 'The response parameter is missing.'
@@ -50,7 +50,7 @@ class Recaptcha2
     return @validate req.body['g-recaptcha-response'], ip
 
   translateErrors: (errorCodes)->
-    return (ERRORS[key] or key)  if not Array.isArray errorCodes
+    return (ERRORS[errorCodes] or errorCodes)  if not Array.isArray errorCodes
     readableErrors = []
     for key in errorCodes
       readableErrors.push (ERRORS[key] or key)

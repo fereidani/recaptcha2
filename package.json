@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test ./node_modules/.bin/mocha --compilers coffee:coffee-script/register --recursive tests",
-    "compile": "./node_modules/.bin/coffee -c index.coffee"
+    "compile": "./node_modules/.bin/coffee -c --no-header index.coffee"
   },
   "repository": {
     "type": "git",

@@ -12,7 +12,6 @@
     "url": "git+ssh://git@github.com/fereidani/recaptcha2.git"
   },
   "dependencies": {
-    "bluebird": "2.x",
     "request": "2.x"
   },
   "devDependencies": {
@@ -33,5 +32,11 @@
   "bugs": {
     "url": "https://github.com/fereidani/recaptcha2/issues"
   },
-  "homepage": "https://github.com/fereidani/recaptcha2#readme"
+  "homepage": "https://github.com/fereidani/recaptcha2#readme",
+  "contributors": [
+    {
+      "name": "Dumitru Glavan",
+      "email": "contact@dumitruglavan.com"
+    }
+  ]
 }

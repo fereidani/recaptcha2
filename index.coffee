@@ -1,6 +1,4 @@
-
 request = require 'request'
-Promise = require 'bluebird'  if not Promise
 
 ERRORS =
   'request-error': 'Api request failed.'
@@ -32,19 +30,19 @@ class Recaptcha2
     @apiEndpoint = @apiEndpoint.replace "https", "http"  if @config.ssl is false
 
   getRequestOptions: (body)->
-    body.secret = @config.siteKey
+    body.secret = @config.secretKey
     Object.assign {}, DEFAULT_REQUEST_OPTIONS,
       uri: @apiEndpoint
       form: body
 
-  validate: (response, remoteip = null)->
+  validate: (response, remoteip)->
     new Promise (resolve, reject)=>
       return reject ['missing-input-response']  if not response
       options = @getRequestOptions {response, remoteip}
       request options, (error, response, body)->
         return reject ['request-error', error.toString()]  if error
         return resolve true  if body.success is true
-        reject response['error-codes']
+        reject body['error-codes']
 
   validateRequest: (req, ip)->
     return @validate req.body['g-recaptcha-response'], ip

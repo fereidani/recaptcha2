@@ -1,11 +1,7 @@
 (function() {
-  var DEFAULT_CONFIG, DEFAULT_REQUEST_OPTIONS, ERRORS, GOOGLE_CAPTCHA_ENDPOINT, Promise, Recaptcha2, request;
+  var DEFAULT_CONFIG, DEFAULT_REQUEST_OPTIONS, ERRORS, GOOGLE_CAPTCHA_ENDPOINT, Recaptcha2, request;
 
   request = require('request');
-
-  if (!Promise) {
-    Promise = require('bluebird');
-  }
 
   ERRORS = {
     'request-error': 'Api request failed.',
@@ -41,7 +37,7 @@
     }
 
     Recaptcha2.prototype.getRequestOptions = function(body) {
-      body.secret = this.config.siteKey;
+      body.secret = this.config.secretKey;
       return Object.assign({}, DEFAULT_REQUEST_OPTIONS, {
         uri: this.apiEndpoint,
         form: body
@@ -49,9 +45,6 @@
     };
 
     Recaptcha2.prototype.validate = function(response, remoteip) {
-      if (remoteip == null) {
-        remoteip = null;
-      }
       return new Promise((function(_this) {
         return function(resolve, reject) {
           var options;
@@ -69,7 +62,7 @@
             if (body.success === true) {
               return resolve(true);
             }
-            return reject(response['error-codes']);
+            return reject(body['error-codes']);
           });
         };
       })(this));

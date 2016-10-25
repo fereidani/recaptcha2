@@ -1,5 +1,5 @@
-nock      = require "nock"
-should    = require "should"
+nock       = require "nock"
+should     = require "should"
 Recaptcha2 = require "../index.coffee"
 
 recaptcha2 = new Recaptcha2 siteKey: "public_site_key", secretKey: "secret_key"

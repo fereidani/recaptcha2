@@ -1,6 +1,6 @@
 {
   "name": "recaptcha2",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "Easy api for google reCAPTCHA version 2 for node.js and express.js",
   "main": "index.js",
   "scripts": {

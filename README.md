@@ -75,3 +75,6 @@ recaptcha.formElement() returns standard form element for reCAPTCHA which you sh
 
 you can also set class name like recaptcha.formElement('custom-class-for-recaptcha')
 
+# Changelog
+
+Please see the [CHANGELOG.md file](https://github.com/fereidani/recaptcha2/blob/master/CHANGELOG.md).

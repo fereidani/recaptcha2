@@ -35,6 +35,10 @@
   "homepage": "https://github.com/fereidani/recaptcha2#readme",
   "contributors": [
     {
+      "name": "Khashayar Fereidani",
+      "email": "info@fereidani.com"
+    },
+    {
       "name": "Dumitru Glavan",
       "email": "contact@dumitruglavan.com"
     }

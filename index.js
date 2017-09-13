@@ -44,7 +44,7 @@
       });
     };
 
-    Recaptcha2.prototype.validate = function(response, remoteip) {
+    Recaptcha2.prototype.validate = function(response, remoteip, hostnameValidator) {
       return new Promise((function(_this) {
         return function(resolve, reject) {
           var options;
@@ -59,6 +59,11 @@
             if (error) {
               return reject(['request-error', error.toString()]);
             }
+            if (hostnameValidator) {
+              if (!hostnameValidator(body.hostname)) {
+                return reject(['invalid-hostname']);
+              }
+            }
             if (body.success === true) {
               return resolve(true);
             }
@@ -68,8 +73,8 @@
       })(this));
     };
 
-    Recaptcha2.prototype.validateRequest = function(req, ip) {
-      return this.validate(req.body['g-recaptcha-response'], ip);
+    Recaptcha2.prototype.validateRequest = function(req, ip, hostnameValidator) {
+      return this.validate(req.body['g-recaptcha-response'], ip, hostnameValidator);
     };
 
     Recaptcha2.prototype.translateErrors = function(errorCodes) {

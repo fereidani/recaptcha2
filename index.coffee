@@ -35,17 +35,18 @@ class Recaptcha2
       uri: @apiEndpoint
       form: body
 
-  validate: (response, remoteip)->
+  validate: (response, remoteip, hostnameValidator)->
     new Promise (resolve, reject)=>
       return reject ['missing-input-response']  if not response
       options = @getRequestOptions {response, remoteip}
       request options, (error, response, body)->
         return reject ['request-error', error.toString()]  if error
+        return reject ['invalid-hostname'] if not hostnameValidator(body.hostname) if hostnameValidator
         return resolve true  if body.success is true
         reject body['error-codes']
 
-  validateRequest: (req, ip)->
-    return @validate req.body['g-recaptcha-response'], ip
+  validateRequest: (req, ip, hostnameValidator)->
+    return @validate req.body['g-recaptcha-response'], ip, hostnameValidator
 
   translateErrors: (errorCodes)->
     return (ERRORS[errorCodes] or errorCodes)  if not Array.isArray errorCodes

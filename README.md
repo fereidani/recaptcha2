@@ -62,7 +62,12 @@ function submitForm(req, res) {
 
 `recaptcha.formElement()` returns standard form element for reCAPTCHA which you should include at the end of your html form element.
 
-You can also set class name like `recaptcha.formElement('custom-class-for-recaptcha')`.
+You can also set CSS classes like this: `recaptcha.formElement('custom-class-for-recaptcha')`.
+The default class is `g-recaptcha`.
+
+```html
+<div class="custom-class-for-recaptcha" data-sitekey="your-site-key"></div>
+```
 
 ## Changelog
 

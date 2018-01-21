@@ -1,39 +1,31 @@
 # reCAPTCHA2
 Easy verifier for Google reCAPTCHA version 2 for Node.js
 
-# Documents :
+## How to use
 
-**First:**
+### Setup reCAPTCHA on your site
 
-You need to receive your site key and secret key for your domain from https://www.google.com/recaptcha/intro/
+You need to receive your site key and secret key for your domain from https://www.google.com/recaptcha/intro/.
 
 Follow the steps on this page to include the reCAPTCHA on your website.
 
-**How to initialize:**
+### Initialize verifier
 ```js
 var reCAPTCHA = require('recaptcha2');
 
 var recaptcha = new reCAPTCHA({
-  siteKey: 'your-site-key',
-  secretKey: 'your-secret-key'
+  siteKey: 'your-site-key', // retrieved during setup
+  secretKey: 'your-secret-key' // retrieved during setup
+  ssl: false // optional, defaults to true. Disable if you don't want to access the Google API via a secure connection
 });
 ```
-**Configuration details:**
 
-Config of main class is a javascript object and attributes are :
+### Verifying the reCAPTCHA response
 
-```
-siteKey: your Site Key from Google
-secretKey: your Secret Key from Google
-ssl: use https to access Google API ( boolean - default = true )
-```
+reCAPTCHA2 uses promises to validate the reCAPTCHA response, you can use one of the following methods:
+* please mention on catch, library passes error codes from google which you can translate with translateErrors method
 
-**How to verify the reCAPTCHA response:**
-
-reCAPTCHA2 use Promises to validate the reCAPTCHA, you can easily use following methods to verify the responses:
-* please mention on catch , library passes error codes from google which you can translate with translateErrors method
-
-Simple:
+#### Simple:
 ```js
 recaptcha.validate(key)
   .then(function(){
@@ -46,7 +38,7 @@ recaptcha.validate(key)
 ```
 **Optional:** You can also pass the clients IP address to the validate method after the key. For more information on that, please see the [reCAPTCHA documentation](https://developers.google.com/recaptcha/docs/verify).
 
-For Express (you need body-parser):
+#### For use with Express (you need body-parser):
 ```js
 function submitForm(req, res) {
   recaptcha.validateRequest(req)
@@ -64,12 +56,12 @@ function submitForm(req, res) {
 }
 ```
 
-**Form Element:**
+### Generating the reCAPTCHA widget
 
-recaptcha.formElement() returns standard form element for reCAPTCHA which you should include in end of your html form element
+`recaptcha.formElement()` returns standard form element for reCAPTCHA which you should include at the end of your html form element.
 
-you can also set class name like recaptcha.formElement('custom-class-for-recaptcha')
+You can also set class name like `recaptcha.formElement('custom-class-for-recaptcha')`.
 
-# Changelog
+## Changelog
 
 Please see the [CHANGELOG.md](https://github.com/fereidani/recaptcha2/blob/master/CHANGELOG.md).

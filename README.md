@@ -1,71 +1,66 @@
 # reCAPTCHA2
-Easy verifier for google reCAPTCHA version 2 for Node.js
+Easy verifier for Google reCAPTCHA version 2 for Node.js
 
 # Documents :
 
 **First:**
 
-You need to receive Site Key and Secret Key for your domain from : https://www.google.com/recaptcha/intro/index.html
+You need to receive your site key and secret key for your domain from https://www.google.com/recaptcha/intro/
 
-after that add this code to your html :
+Follow the steps on this page to include the reCAPTCHA on your website.
 
-```
-<script src='https://www.google.com/recaptcha/api.js'></script>
-```
+**How to initialize:**
+```js
+var reCAPTCHA = require('recaptcha2');
 
-**How to initialize :**
+var recaptcha = new reCAPTCHA({
+  siteKey: 'your-site-key',
+  secretKey: 'your-secret-key'
+});
 ```
-reCAPTCHA=require('recaptcha2')
-
-recaptcha=new reCAPTCHA({
-  siteKey:'your-site-key',
-  secretKey:'your-secret-key'
-})
-```
-**Config details :**
+**Configuration details:**
 
 Config of main class is a javascript object and attributes are :
 
 ```
-siteKey : your Site Key from google
-
-secretKey : your Secret Key from google
-
-ssl : use https to access google api ( boolean - default : true )
+siteKey: your Site Key from Google
+secretKey: your Secret Key from Google
+ssl: use https to access Google API ( boolean - default = true )
 ```
 
-**How to verify captcha key :**
+**How to verify the reCAPTCHA response:**
 
-reCAPTCHA2 use Promises to validate captch , you can easily use following methods to verify captchas :
+reCAPTCHA2 use Promises to validate the reCAPTCHA, you can easily use following methods to verify the responses:
 * please mention on catch , library passes error codes from google which you can translate with translateErrors method
 
 Simple:
-```
+```js
 recaptcha.validate(key)
-.then(function(){
-  // validated and secure
-})
-.catch(function(errorCodes){
-  // invalid
-  console.log(recaptcha.translateErrors(errorCodes));// translate error codes to human readable text
-});
-```
-you can also pass remoteip to validate method after key , for more information please read reCAPTCHA manual about remoteip .
-
-
-
-For Express (you need body-parser) :
-```
-function submitForm(req,res){
-  recaptcha.validateRequest(req)
   .then(function(){
     // validated and secure
-    res.json({formSubmit:true})
   })
   .catch(function(errorCodes){
     // invalid
-    res.json({formSubmit:false,errors:recaptcha.translateErrors(errorCodes)});// translate error codes to human readable text
+    console.log(recaptcha.translateErrors(errorCodes)); // translate error codes to human readable text
   });
+```
+**Optional:** You can also pass the clients IP address to the validate method after the key. For more information on that, please see the [reCAPTCHA documentation](https://developers.google.com/recaptcha/docs/verify).
+
+For Express (you need body-parser):
+```js
+function submitForm(req, res) {
+  recaptcha.validateRequest(req)
+    .then(function(){
+      // validated and secure
+      res.json({formSubmit:true})
+    })
+    .catch(function(errorCodes){
+      // invalid
+      res.json({
+        formSubmit: false,
+        errors: recaptcha.translateErrors(errorCodes) // translate error codes to human readable text
+      });
+    });
 }
 ```
 
@@ -77,4 +72,4 @@ you can also set class name like recaptcha.formElement('custom-class-for-recaptc
 
 # Changelog
 
-Please see the [CHANGELOG.md file](https://github.com/fereidani/recaptcha2/blob/master/CHANGELOG.md).
+Please see the [CHANGELOG.md](https://github.com/fereidani/recaptcha2/blob/master/CHANGELOG.md).

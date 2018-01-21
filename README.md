@@ -66,4 +66,4 @@ You can also set class name like `recaptcha.formElement('custom-class-for-recapt
 
 ## Changelog
 
-Please see the [CHANGELOG.md](https://github.com/fereidani/recaptcha2/blob/master/CHANGELOG.md).
+Please see the [CHANGELOG.md](CHANGELOG.md).

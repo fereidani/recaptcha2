@@ -3,13 +3,13 @@ Easy verifier for Google reCAPTCHA version 2 for Node.js
 
 ## How to use
 
-### Setup reCAPTCHA on your site
+### Step 1: Setup reCAPTCHA on your site
 
 You need to receive your site key and secret key for your domain from https://www.google.com/recaptcha/intro/.
 
 Follow the steps on this page to include the reCAPTCHA on your website.
 
-### Initialize verifier
+### Step 2: Initialize verifier
 ```js
 var reCAPTCHA = require('recaptcha2');
 
@@ -20,7 +20,7 @@ var recaptcha = new reCAPTCHA({
 });
 ```
 
-### Verifying the reCAPTCHA response
+### Step 3: Verifying the reCAPTCHA response
 
 reCAPTCHA2 uses promises to validate the reCAPTCHA response, you can use one of the following methods:
 * please mention on catch, library passes error codes from google which you can translate with translateErrors method

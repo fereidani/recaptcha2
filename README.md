@@ -27,7 +27,7 @@ var recaptcha = new reCAPTCHA({
 reCAPTCHA2 uses promises to validate the reCAPTCHA response, you can use one of the following methods:
 * please mention on catch, library passes error codes from google which you can translate with translateErrors method
 
-#### Simple:
+#### Simple usage:
 ```js
 recaptcha.validate(key)
   .then(function(){

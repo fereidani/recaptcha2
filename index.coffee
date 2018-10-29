@@ -21,6 +21,9 @@ DEFAULT_REQUEST_OPTIONS =
   form: {}
 
 
+escapeAttribute=(atr)->
+  return atr.replace(/"/g,"&quot;").replace(/[\r\n]+/g," ")
+
 class Recaptcha2
 
   apiEndpoint: GOOGLE_CAPTCHA_ENDPOINT
@@ -55,6 +58,6 @@ class Recaptcha2
     readableErrors
 
   formElement: (htmlClass = 'g-recaptcha')->
-    '<div class="' + htmlClass + '" data-sitekey="' + @config.siteKey + '"></div>'
+    '<div class="' + escapeAttribute(htmlClass) + '" data-sitekey="' + escapeAttribute(@config.siteKey) + '"></div>'
 
 module.exports = Recaptcha2

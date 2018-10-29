@@ -36,27 +36,25 @@ describe "recaptcha2", ->
 
   describe "validate", ->
     describe "when there is a valid frontend captcha response", ->
-      it "resolves as successful", (done)->
+      it "resolves as successful", ()->
         postData = response: "valid_captcha_response", remoteip: "127.0.0.1", secret: "secret_key"
         scope = nock("https://www.google.com")
         .post("/recaptcha/api/siteverify", postData).reply 200, RECAPTCHA_RESPONSE_OK
         recaptcha2.validate("valid_captcha_response", "127.0.0.1")
         .then (response)->
           response.should.eql true
-          done()
         .catch (error)->
           should.not.exist error
 
     describe "when there is an empty frontend captcha response", ->
-      it "rejects", (done)->
+      it "rejects", ()->
         recaptcha2.validate("")
         .catch (errors)->
           should.exist errors
           errors.should.eql ['missing-input-response']
-          done()
 
     describe "when there is an invalid frontend captcha response", ->
-      it "rejects", (done)->
+      it "rejects", ()->
         postData = response: "invalid_captcha_response", remoteip: "127.0.0.1", secret: "secret_key"
         scope = nock("https://www.google.com")
         .post("/recaptcha/api/siteverify", postData).reply 200, RECAPTCHA_RESPONSE_ERROR
@@ -64,10 +62,9 @@ describe "recaptcha2", ->
         .catch (errors)->
           should.exist errors
           errors.should.eql ['invalid-input-response', "invalid-input-secret"]
-          done()
 
     describe "when there is a request error", ->
-      it "rejects", (done)->
+      it "rejects", ()->
         postData = response: "valid_captcha_response", remoteip: "127.0.0.1", secret: "secret_key"
         scope = nock("https://www.google.com")
         .post("/recaptcha/api/siteverify", postData).replyWithError 500
@@ -75,18 +72,16 @@ describe "recaptcha2", ->
         .catch (errors)->
           should.exist errors
           errors.should.eql ['request-error', "Error: 500"]
-          done()
 
   describe "validateRequest", ->
     describe "when there is a valid frontend captcha response", ->
-      it "resolves as successful", (done)->
+      it "resolves as successful", ()->
         postData = response: "valid_captcha_response", remoteip: "127.0.0.1", secret: "secret_key"
         scope = nock("https://www.google.com")
         .post("/recaptcha/api/siteverify", postData).reply 200, RECAPTCHA_RESPONSE_OK
         recaptcha2.validateRequest({body: {'g-recaptcha-response': "valid_captcha_response"}}, "127.0.0.1")
         .then (response)->
           response.should.eql true
-          done()
         .catch (error)->
           should.not.exist error
 
@@ -123,12 +118,24 @@ describe "recaptcha2", ->
         recaptcha2.translateErrors(errors).should.eql readableErrors
 
   describe "formElement", ->
-    describe "when there is a given htlm class", ->
+    describe "when there is a given html class", ->
       it "returns a div with the given class", ->
-        div = '<div class="test-class" data-sitekey="public_site_key"></div>'
-        recaptcha2.formElement("test-class").should.eql div
+        div = '<div class="test-class class2" data-sitekey="public_site_key"></div>'
+        recaptcha2.formElement("test-class class2").should.eql div
 
-    describe "when there is no given htlm class", ->
+    describe "when there is no given html class", ->
       it "returns a div with the default class", ->
         div = '<div class="g-recaptcha" data-sitekey="public_site_key"></div>'
         recaptcha2.formElement().should.eql div
+
+  describe "security tests", ->
+    attackVectorClass='" OnErRor=alert(123) b="'
+    attackVectorSecretKey='" OnErRor=alert(321) b="'
+    insecureRecaptcha = new Recaptcha2 siteKey: attackVectorSecretKey, secretKey: "secret_key"
+    describe "html class name is present", ->
+      it "returns a div with the escaped class", ->
+        insecureRecaptcha.formElement(attackVectorClass).should.not.containEql attackVectorClass
+
+    describe "when sitekey is malicious", ->
+      it "returns a div with the escaped sitekey", ->
+        insecureRecaptcha.formElement().should.not.containEql attackVectorSecretKey

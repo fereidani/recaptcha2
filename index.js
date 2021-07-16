@@ -83,8 +83,8 @@
         return readableErrors;
       }
 
-      formElement(htmlClass = 'g-recaptcha') {
-        return '<div class="' + escapeAttribute(htmlClass) + '" data-sitekey="' + escapeAttribute(this.config.siteKey) + '"></div>';
+      formElement(htmlClass = 'g-recaptcha', theme = 'light') {
+        return '<div data-theme="' + escapeAttribute(theme) + '" class="' + escapeAttribute(htmlClass) + '" data-sitekey="' + escapeAttribute(this.config.siteKey) + '"></div>';
       }
 
     };

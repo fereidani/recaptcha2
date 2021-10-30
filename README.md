@@ -11,9 +11,9 @@ Follow the steps on this page to include the reCAPTCHA on your website.
 
 ### Step 2: Initialize verifier
 ```js
-var reCAPTCHA = require('recaptcha2');
+const reCAPTCHA = require('recaptcha2');
 
-var recaptcha = new reCAPTCHA({
+const recaptcha = new reCAPTCHA({
   siteKey: 'your-site-key', // retrieved during setup
   secretKey: 'your-secret-key', // retrieved during setup
   ssl: false // optional, defaults to true.
@@ -29,14 +29,17 @@ reCAPTCHA2 uses promises to validate the reCAPTCHA response, you can use one of 
 
 #### Simple usage:
 ```js
-recaptcha.validate(key)
-  .then(function(){
-    // validated and secure
-  })
-  .catch(function(errorCodes){
+async reCaptcha(key){
+  try {
+    const validation = await recaptcha.validate(key);
+    // returns type boolean true if validation is successful
+    return validation;
+  } catch (error) {
     // invalid
     console.log(recaptcha.translateErrors(errorCodes)); // translate error codes to human readable text
-  });
+    return error;
+  }
+}
 ```
 **Optional:** You can also pass the clients IP address to the validate method after the key. For more information on that, please see the [reCAPTCHA documentation](https://developers.google.com/recaptcha/docs/verify).
 
